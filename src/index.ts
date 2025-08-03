@@ -1,7 +1,7 @@
-import { users } from "./routes/users.routes";
+import { serve } from "bun";
 import { hc } from "hono/client";
 import { createServer } from "./core/server";
-import { serve } from "bun";
+import { users } from "./routes/users.routes";
 
 const toto = createServer(users);
 
