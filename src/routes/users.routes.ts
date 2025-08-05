@@ -3,15 +3,15 @@ import { z } from "zod";
 
 const uSchema = z
   .object({
-    name: z.string().nonempty(),
-    email: z.email(),
     age: z.number().gt(18),
+    email: z.email(),
+    name: z.string().nonempty(),
   })
   .openapi({
     example: {
-      name: "toto",
-      email: "google@gmail.com",
       age: 19,
+      email: "google@gmail.com",
+      name: "toto",
     },
   });
 

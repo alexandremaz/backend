@@ -28,6 +28,18 @@
       "recommended": true
     }
   },
+  "overrides": [
+    {
+      "assist": {
+        "actions": {
+          "source": {
+            "useSortedKeys": "off"
+          }
+        }
+      },
+      "includes": ["package.json", "bun.lock"]
+    }
+  ],
   "vcs": {
     "clientKind": "git",
     "enabled": false,

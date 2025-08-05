@@ -14,9 +14,9 @@ const client = hc<Routes>("http://localhost:3000");
 
 const res = await client.users.$post({
   json: {
-    name: "toto",
-    email: "toto@toto.com",
     age: 30,
+    email: "toto@toto.com",
+    name: "toto",
   },
 });
 
