@@ -10,31 +10,31 @@ import { logger } from "./middlewares/logger";
  * @param routes – A fully-typed OpenAPIHono router containing our business routes.
  */
 export const createServer = <
-	E extends Env, // Env (Bindings / Variables)
-	S extends Schema, // Collected OpenAPI schemas
-	P extends string = "/", // Base path of the router
+  E extends Env, // Env (Bindings / Variables)
+  S extends Schema, // Collected OpenAPI schemas
+  P extends string = "/", // Base path of the router
 >(
-	routes: OpenAPIHono<E, S, P>,
+  routes: OpenAPIHono<E, S, P>,
 ): OpenAPIHono<E, S, P> => {
-	// Create the root app using the same generics as the provided router
-	const app = new OpenAPIHono<E, S, P>();
+  // Create the root app using the same generics as the provided router
+  const app = new OpenAPIHono<E, S, P>();
 
-	/* ---------- Global middlewares ---------- */
-	app.use("*", errorHandler);
-	app.use("*", logger);
+  /* ---------- Global middlewares ---------- */
+  app.use("*", errorHandler);
+  app.use("*", logger);
 
-	/* ---------- OpenAPI JSON + Swagger UI ---------- */
-	app.doc("/doc", {
-		openapi: "3.0.0",
-		info: { title: "My API", version: "1.0.0" },
-	});
-	app.get("/ui", swaggerUI({ url: "/doc" }));
+  /* ---------- OpenAPI JSON + Swagger UI ---------- */
+  app.doc("/doc", {
+    info: { title: "My API", version: "1.0.0" },
+    openapi: "3.0.0",
+  });
+  app.get("/ui", swaggerUI({ url: "/doc" }));
 
-	/* ---------- Mount business routes ---------- */
-	app.route("/", routes);
+  /* ---------- Mount business routes ---------- */
+  app.route("/", routes);
 
-	/* ---------- 404 fallback ---------- */
-	app.notFound((c) => c.json({ error: "Not Found" }, 404));
+  /* ---------- 404 fallback ---------- */
+  app.notFound((c) => c.json({ error: "Not Found" }, 404));
 
-	return app;
+  return app;
 };
