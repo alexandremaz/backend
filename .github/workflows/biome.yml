@@ -1,0 +1,32 @@
+name: 🔍 Biome
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  biome:
+    name: 🔍 Biome
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🛠️ Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version-file: ".bun-version"
+
+      - name: 📦 Install dependencies
+        run: bun install
+
+      - name: 🔎 Biome check
+        run: bun run biome:check
+
+      - name: 🧪 sort-package-json check
+        run: bun run sort-package-json:check

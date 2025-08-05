@@ -4,7 +4,10 @@
   "type": "module",
   "module": "index.ts",
   "scripts": {
-    "biome:check": "biome check --assist-enabled=true --write"
+    "biome:check": "biome ci",
+    "biome:fix": "biome check --write",
+    "sort-package-json:check": "sort-package-json --check",
+    "sort-package-json:fix": "sort-package-json"
   },
   "dependencies": {
     "@hono/swagger-ui": "^0.5.2",
